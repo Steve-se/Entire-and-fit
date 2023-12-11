@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Post, Comment, Author, Category, RepliedComment
-from markdownify.templatetags.markdownify import markdownify
+from markdown import markdown as md
 
 class CategorySerializer(serializers.ModelSerializer):
     num_of_posts_in_this_category = serializers.IntegerField(
@@ -14,7 +14,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     # url = serializers.HyperlinkedIdentityField(view_name='post-detail')
     total_comments_on_this_post = serializers.SerializerMethodField()
-    markdown_content = serializers.SerializerMethodField()
+    body = serializers.SerializerMethodField()
     category = serializers.StringRelatedField()
     author = serializers.StringRelatedField()
 
@@ -23,8 +23,8 @@ class PostSerializer(serializers.ModelSerializer):
         # fields = '__all__'
         exclude = ['status']
 
-    def get_markdown_content(self, obj):
-        return markdownify(obj.body)
+    def get_body(self, obj):
+        return md(obj.body)
     
     def get_total_comments_on_this_post(self, obj):
         total_comments = obj.comments.count()
