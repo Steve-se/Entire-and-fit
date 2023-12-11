@@ -18,3 +18,4 @@ webencodings==0.5.1
 django-environ
 whitenoise
 gunicorn
+

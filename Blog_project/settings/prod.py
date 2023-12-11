@@ -1,7 +1,7 @@
 from .base import *
 
 
-DEBUG = False
+DEBUG = True
 
 # Databases
 DATABASES = {
@@ -14,6 +14,9 @@ DATABASES = {
         'PORT': env('DATABASE_PORT', None),
     },
 }
+
+# DATABASES['default'] = dj_database_url.parse("postgres://entireandfit_user:DrsQlVXQdn9OFEtzt9rprQSlpDcwc9b1@dpg-clrebtie9h4c73av1q6g-a.oregon-postgres.render.com/entireandfit")
+
 
 # set admin
 ADMINS = (
